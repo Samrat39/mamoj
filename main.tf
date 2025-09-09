@@ -6,6 +6,12 @@ terraform {
     }
   }
 }
+provider "databricks" {
+  client_id = "fdjnnsdnfjsd-xxxx-xxxx-xxxx-xxxxxxxxxx"
+  client_secret = "djkandlkdlkamdlkamdlma"
+  subscription_id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+  tenant_id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+}
 
 # Module Call
 module "databricks_cluster" {
