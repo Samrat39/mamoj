@@ -5,6 +5,8 @@ on:
     branches:
       - main
       - terraform-poc
+      - master
+      
   workflow_dispatch:
     inputs:
       environment:
