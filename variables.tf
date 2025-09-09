@@ -50,3 +50,10 @@ variable "custom_tags" {
   type    = map(string)
   default = {}
 }
+
+variable "subscription_id" {}
+variable "client_id" {}
+variable "client_secret" {}
+variable "tenant_id" {}
+variable "workspace_name" {}
+variable "resource_group" {}

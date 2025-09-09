@@ -1,17 +1,39 @@
 terraform {
   required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 3.0"
+    }
     databricks = {
       source  = "databricks/databricks"
       version = "~> 1.34.0"
     }
   }
+  required_version = ">= 1.5.0"
 }
+
+provider "azurerm" {
+  features {}
+  subscription_id = var.subscription_id
+  client_id       = var.client_id
+  client_secret   = var.client_secret
+  tenant_id       = var.tenant_id
+}
+
+# Get existing Databricks workspace
+data "azurerm_databricks_workspace" "workspace" {
+  name                = var.workspace_name
+  resource_group_name = var.resource_group
+}
+
+# Databricks provider using SPN
 provider "databricks" {
-  client_id = "fdjnnsdnfjsd-xxxx-xxxx-xxxx-xxxxxxxxxx"
-  client_secret = "djkandlkdlkamdlkamdlma"
-  subscription_id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-  tenant_id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+  azure_workspace_resource_id = data.azurerm_databricks_workspace.workspace.id
+  azure_client_id             = var.client_id
+  azure_client_secret         = var.client_secret
+  azure_tenant_id             = var.tenant_id
 }
+
 
 # Module Call
 module "databricks_cluster" {
