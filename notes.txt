@@ -1,0 +1,24 @@
+Each SQL Endpoint in Databricks has a unique ID. You’ll use that ID for the import.
+
+Find the SQL Endpoint ID:
+
+In Databricks UI:
+Go to SQL → SQL Warehouses → Click your warehouse → Copy its ID from the URL.
+Example URL:
+
+https://<workspace-url>#sql/warehouses/<sql-endpoint-id>
+
+
+The <sql-endpoint-id> is what you need.
+
+Or via Databricks CLI:
+
+databricks sql warehouses list
+
+
+Find the warehouse and note the id.
+
+Run the Terraform Import Command:
+
+terraform import databricks_sql_endpoint.example_sql <sql-endpoint-id>
+
